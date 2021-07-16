@@ -1,0 +1,23 @@
+### API 1 - to write words into database
+POST http://localhost:3004/register
+Content-Type: application/json
+
+{
+  "username": "adam_richard",
+  "name": "Adam Richard",
+  "password": "richard_567",
+  "gender": "male",
+  "location": "Detroit"
+}
+
+
+
+
+### API 2 - to write words into database
+POST http://localhost:3004/login
+Content-Type: application/json
+
+{
+  "username": "adam_richard",
+  "password": "richard_567"
+}
