@@ -22,9 +22,7 @@ Content-Type: application/json
   "password": "richard_567"
 }
 
-###API 4 -to get
-GET http://localhost:3004/posts/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkYW1fcmljaGFyZCIsImlhdCI6MTYyNjQ2MDk4NX0.C4BJ71B0Vvw7Uo2pLPIblrw-pg55xP2jDkCUPmn1Nd8
+
 
 
 ###API 3 -to put
