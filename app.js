@@ -9,10 +9,9 @@ const jwt = require("jsonwebtoken");
 const databasePath = path.join(__dirname, "userData.db");
 
 const app = express();
-
-app.use(express.json());
 app.use(cors());
 
+app.use(express.json());
 let database = null;
 
 const initializeDbAndServer = async () => {
@@ -22,8 +21,8 @@ const initializeDbAndServer = async () => {
       driver: sqlite3.Database,
     });
 
-    app.listen(3004, () =>
-      console.log("Server Running at http://localhost:3004/")
+    app.listen(3002, () =>
+      console.log("Server Running at http://localhost:3002/")
     );
   } catch (error) {
     console.log(`DB Error: ${error.message}`);
@@ -64,17 +63,20 @@ app.post("/register/", async (request, response) => {
 
 // API 2
 app.post("/login/", async (request, response) => {
-  const { username, password } = request.body;
+  console.log(request.body);
 
+  /* const username = "adam_richard";
+  const password = "richard_567"; */
+  const { username, password } = request.body;
+  console.log("hello", username, password);
   const getUserQuery = `SELECT *
     FROM user
     WHERE username ='${username}';`;
 
   const dbGetUser = await database.get(getUserQuery);
-
   if (dbGetUser === undefined) {
     response.status(400);
-    response.send("Invalid user");
+    response.send("Invalid user entered");
   } else {
     const isPasswordMatched = await bcrypt.compare(
       password,
@@ -97,7 +99,6 @@ app.post("/login/", async (request, response) => {
 // authenticate token
 function authenticateToken(request, response, next) {
   const authHeader = request.headers["authorization"];
-  console.log(request.body);
   let jwtToken;
   if (authHeader !== undefined) {
     jwtToken = authHeader.split(" ")[1];
@@ -127,23 +128,28 @@ function authenticateToken(request, response, next) {
 //api 3
 app.post("/posts/", authenticateToken, async (request, response) => {
   const { userId, id, title, body } = request.body;
-
+  /* console.log("__________+__________");
+  console.log(request.body);
+  console.log("_____________________"); */
   const insertQuery = `insert into user_post (user_id,post_id,title,body)
                         values (${userId}, ${id}, "${title}", "${body}");`;
 
   const dbQuery = await database.run(insertQuery);
-  response.send("success");
+  // console.log(dbQuery);
+  response.send(JSON.stringify("success"));
 });
 
 //api 4
 app.get("/posts/:userId", authenticateToken, async (request, response) => {
+  console.log("db query");
+
   const { userId } = request.params;
 
   const selectQuery = `select *
-                        from user_post
-                        where user_id="${userId}";`;
+                        from user_post;`;
   const dbQuery = await database.all(selectQuery);
   console.log(dbQuery);
+  response.send(JSON.stringify(dbQuery));
 });
 
 module.exports = app;

@@ -14,7 +14,7 @@ Content-Type: application/json
 
 
 ### API 2 - to login
-POST http://localhost:3004/login 
+POST http://localhost:3002/login 
 Content-Type: application/json 
 
 {
@@ -25,17 +25,6 @@ Content-Type: application/json
 
 
 
-###API 3 -to put
-POST  http://localhost:3004/posts/
-Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkYW1fcmljaGFyZCIsImlhdCI6MTYyNjQ2MDk4NX0.C4BJ71B0Vvw7Uo2pLPIblrw-pg55xP2jDkCUPmn1Nd8
-
-{
-    "userId": 1,
-    "id": 4,
-    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-  }
 
 ###API 4 -to get  
 GET http://localhost:3004/posts/1/ 
